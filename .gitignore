@@ -1,0 +1,56 @@
+workspace.code-workspace
+.gradle
+.idea
+todo-api/.bundle
+todo-api/.idea
+# Ignore the default SQLite database.
+todo-api/db/*.sqlite3
+todo-api/db/*.sqlite3-journal
+todo-api/db/*.sqlite3-*
+
+# Ignore all logfiles and tempfiles.
+todo-api/log/*
+todo-api/tmp/*
+!todo-api/log/.keep
+!todo-api/tmp/.keep
+
+# Ignore pidfiles, but keep the directory.
+todo-api/tmp/pids/*
+!todo-api/tmp/pids/
+!todo-api/tmp/pids/.keep
+
+# Ignore uploaded files in development.
+todo-api/storage/*
+!todo-api/storage/.keep
+todo-api/.byebug_history
+
+# Ignore master key for decrypting credentials and more.
+todo-api/config/master.key
+
+
+
+# See https://help.github.com/ignore-files/ for more about ignoring files.
+
+# compiled output
+todo-frontend/dist/
+todo-frontend/tmp/
+
+# dependencies
+todo-frontend/bower_components/
+todo-frontend/node_modules/
+
+# misc
+todo-frontend/.env*
+todo-frontend/.pnp*
+todo-frontend/.sass-cache
+todo-frontend/connect.lock
+todo-frontend/coverage/
+todo-frontend/libpeerconnection.log
+todo-frontend/npm-debug.log*
+todo-frontend/testem.log
+todo-frontend/yarn-error.log
+
+# ember-try
+todo-frontend/.node_modules.ember-try/
+todo-frontend/bower.json.ember-try
+todo-frontend/package.json.ember-try

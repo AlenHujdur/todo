@@ -1,0 +1,9 @@
+entrypoint: bundle exec rackup --port $PORT
+env: flex
+runtime: ruby
+
+env_variables:
+  SECRET_KEY_BASE: 64c869d747bc6a38fd95d268563e3150301d1572dc996129c406ffa81c59873c90a3ecda024058eb665aff0a09474633762dffccfbcdf576e66f8e0e7f98550b
+
+beta_settings:
+  cloud_sql_instances: todos-299820:europe-west1:tasks-todo

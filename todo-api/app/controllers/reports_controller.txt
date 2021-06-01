@@ -1,0 +1,11 @@
+# class ReportsController < ApplicationController
+
+#   def index
+#     @countTodos = Report.countTodos
+#     render :json => "{'Data':[
+#       {'Report1':'2021-05-23'},
+#       {'NrOfTodos':'#{@countTodos}'}
+#     ]}"
+#     #@reports = Report.all
+#   end
+# end
