@@ -1,0 +1,22 @@
+<div class="contact-clean">
+  <form onsubmit={{action "createTodo"}} enctype='multipart/form-data'>
+    <h2 class="text-center">To-do</h2>
+    <div class="form-group" for="name">{{input class="form-control" type="text" id="name" value=name placeholder="Title"}}</div>
+    <div class="form-group" for="description">{{textarea class="form-control" rows="14" cols="60" id="description" value=description placeholder="Details"}}
+    </div>
+    <div class="form-group">
+      <div class="form-check">{{input class="form-check-input" type="radio" name="finished" change=(action (mut finished) 'finished')  value='finished'}}<label class="form-check-label" for="finished">Finished</label></div>
+      <div class="form-check">{{input class="form-check-input" type="radio" name="finished" change=(action (mut finished) 'inProgress')  value='inProgress'}}<label class="form-check-label" for="inProgress">In progress</label></div>
+      <div class="form-check">{{input class="form-check-input" type="radio" name="finished" change=(action (mut finished) 'stopped')  value='stopped'}}<label class="form-check-label" for="stopped">Stopped</label></div>
+    </div>
+    <div class="form-group">{{input class="form-control" type="date" id="created_at" value=created_at placeholder="Date"}}</div>
+<!--    <input type="file" id="filename" name="document">-->
+<!--    <FileUpload/>-->
+    <input type="file" {{on "change" (fn this.upload)}} />
+
+    <div class="form-group" id="button-save"><button class="btn btn-primary" type="submit">Save</button></div>
+  </form>
+
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.bundle.min.js"></script>

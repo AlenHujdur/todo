@@ -1,0 +1,12 @@
+import Controller from '@ember/controller';
+import { action } from '@ember/object';
+
+export default class IndexController extends Controller {
+
+  @action
+  deleteTodo(id) {
+    console.log("Id od: "+ id);
+    let todo = this.store.peekRecord('todo',id);
+    todo.destroyRecord();//    delete();
+  }
+}

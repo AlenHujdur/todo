@@ -1,0 +1,27 @@
+<div id="custom-background"><br><br>
+<div class="container">
+    <ul class="list-group">
+    {{#each model as |todo|}}
+        <li class="list-group-item"><span>{{todo.id}} - {{todo.name}}</span>
+            <div><a class="btn btn-primary pull-left" data-toggle="collapse" aria-expanded="false" aria-controls="collapse-{{todo.id}}" href="#collapse-{{todo.id}}" role="button">Show Content</a>
+              <div class="collapse" id="collapse-{{todo.id}}"><br>
+                    <p>
+                      Name: {{todo.name}}<br>
+                      Todo description: {{todo.description}}<br>
+                      Todo created at: {{todo.created_at}}<br>
+                      Todo updated at: {{todo.updated_at}}<br>
+                      Status: {{todo.finished}}
+                    </p>
+                </div>
+              <LinkTo @route="todos.show" @model={{todo.id}} ><a class="btn btn-success pull-left">Open</a></LinkTo>
+              <LinkTo @route="todos.update" @model={{todo.id}} ><a class="btn btn-primary pull-left">Update</a></LinkTo>
+              <a class="btn btn-danger pull-right" onclick={{action "deleteTodo" todo.id}}>Delete</a>
+            </div>
+        </li>
+        {{/each}}
+    </ul>
+
+</div>
+</div>
+
+

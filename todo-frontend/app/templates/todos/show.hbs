@@ -1,0 +1,25 @@
+
+<div class="container">
+  <ul class="list-group">
+      <li class="list-group-item"><span>{{model.id}} - {{model.name}}</span>
+        <div><a class="btn btn-primary pull-left" data-toggle="collapse" aria-expanded="false" aria-controls="collapse-1" href="#collapse-1" role="button">Show Content</a>
+          <div class="collapse" id="collapse-1"><br>
+            <p>
+
+              {{model.name}} <br>
+              Todo description: {{model.description}}<br>
+              Todo created at: {{model.created_at}}<br>
+              Todo updated at: {{model.updated_at}}<br>
+                Status: {{model.finished}}<br>
+            </p>
+          </div>
+          <LinkTo @route="todos.update" @model="{{model.id}}" class="btn btn-primary pull-left">Update</LinkTo>
+          <a class="btn btn-danger pull-right" onclick={{action "deleteTodo" model.id}}>Delete</a>
+        </div>
+      </li>
+      <ReportsTodo::Report />
+  </ul>
+
+</div>
+
+{{outlet}}
