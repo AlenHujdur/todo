@@ -19,15 +19,9 @@ class TodosController < ApplicationController
     render json: @todo
   end
   def update
-    # p "UPDATE params #{params.inspect}"
     @todo = Todo.find(params[:id])
-    # if @todo.document.attached?
-      @todo.update(todo_params)
-      render json: @todo
-    # else
-    #   @todo.update(params_without_file)
-    #   render json: @todo
-    # end
+    @todo.update(todo_params)
+    render json: @todo
   end
   def destroy
     @todo = Todo.find(params[:id])
@@ -38,7 +32,4 @@ class TodosController < ApplicationController
   def todo_params
     params.require(:todo).permit(:name, :description, :finished, :created_at, :updated_at, :document)
   end
-  # def params_without_file
-  #   params.require(:todo).permit(:name, :description, :finished, :created_at, :updated_at)
-  # end
 end
