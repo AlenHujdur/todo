@@ -1,13 +1,9 @@
 import Controller from '@ember/controller';
-//import { action } from '@ember/object';
-
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 import { inject as service } from '@ember/service';
-//import config from '../config/environment.js';
 
 export default class UpdateController extends Controller {
-  _avatar =null;
   @service
   activeStorage;
 
@@ -16,6 +12,11 @@ export default class UpdateController extends Controller {
 
   @tracked
   xhrs = [];
+
+  @action
+  redirect() {
+    window.location.href = "http://localhost:4200/todos";
+  }
 
   @action
   upload(event) {
@@ -35,72 +36,39 @@ export default class UpdateController extends Controller {
           })
           .then((blob) => {
             const signedId = blob.signedId;
-            this.model.avatar = signedId;
-            this._avatar =this.model.avatar;
+            this.model.document = signedId;
           });
       }
     }
   }
-  @action
-  avatar_id(){
-    return this._avatar;
-  }
-  @action
-  get_id(){
-    return this.model.id;
-  }
 
   @action
   updateTodo(event) {
-    //alert("now we can submit the model:" + this.get("todo"));
     event.preventDefault();
     let _todo = this.model;
+    let documentSignatureID = this.model.document;
 
-    console.log("avatarId:" + this.model.avatar);
-    console.log("Model Id:" + this.model.id);
-    if(this._avatar == null){
-       this.store.findRecord('todo',this.model.id).then(function(todo) {
-        todo.name= _todo.get('name');
-        todo.description= _todo.get('description');
-        todo.finished= _todo.get('finished');
-        todo.updated_at= _todo.get('created_at');
-        //todo.avatar = this._avatar;
+    if(this.model.document == null || this.model.document == ''){
+      this.store.findRecord('todo',this.model.id).then(function(todo) {
+        todo.name = _todo.get('name');
+        todo.description = _todo.get('description');
+        todo.finished = _todo.get('finished');
+        todo.updated_at = _todo.get('created_at');
+        todo.document = _todo.get('signedId');
         todo.save();
       });
     }
     else{
-      let todo = this.store.findRecord('todo',this.model.id).then(function(todo) {
+      this.store.findRecord('todo',this.model.id).then(function(todo) {
         todo.name= _todo.get('name');
         todo.description= _todo.get('description');
         todo.finished= _todo.get('finished');
         todo.updated_at= _todo.get('created_at');
-        todo.avatar = this._avatar;
-        //todo.save();
+        todo.document = documentSignatureID;
+        todo.save();
       });
-      todo.save();
     }
-
-    // this.store.findRecord('todo',this.model.id).then(function(todo) {
-    //   todo.avatar= this.avatar_id();
-    //   todo.save();
-    // }).then(this.store.findRecord('todo',this.model.id).then(function(todo){
-    //   todo.name= _todo.get('name');
-    //   todo.description= _todo.get('description');
-    //   todo.finished= _todo.get('finished');
-    //   todo.updated_at= _todo.get('created_at');
-    //   todo.save();
-    // }));
-
-    //this.avatar_id();
-    //let todo = this.model;
-    // this.set('model.avatar', this._avatar);
-    //console.log(this.model.id);
-    //todo.save();
-
-  //  todoModel.save().then(() =>{
-  //     alert("Saved");
-  //     this.transitionToRoute('todos')
-  //   });
+    alert("Updated!");
+    this.redirect();
    }
-
 }

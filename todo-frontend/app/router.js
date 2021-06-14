@@ -17,13 +17,3 @@ Router.map(function () {
   });
   this.route('reports');
 });
-
-
-// export default Route.extend(ApplicationRouteMixin, {
-//   beforeSessionExpired() {
-//     // Do custom async logic here, e.g. notify
-//     // the user that they are about to be logged out.
-//     this.route('private-test');
-//     return RSVP.resolve()
-//   }
-// });

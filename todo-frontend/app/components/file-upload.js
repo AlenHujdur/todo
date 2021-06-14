@@ -33,15 +33,7 @@ export default class UploadComponent extends Component {
           })
           .then((blob) => {
             const signedId = blob.signedId;
-            //let todo = this.modelFor('todo');
-            //console.log("SignedId: " + signedId);
-            //console.log("Todo: ", todo);
-            //let todo = this.model;
-
-            //let todo = this.get('model');
-            //todo.avatar = signedId;
-            this.model.avatar = signedId;
-
+            this.model.document = signedId;
           });
       }
     }

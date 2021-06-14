@@ -5,18 +5,14 @@
       <button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
       <div class="collapse navbar-collapse" id="navcol-1">
         <ul class="navbar-nav">
-          <li class="nav-item"><a class="nav-link active" href="#">First Item</a></li>
+          <li class="nav-item"><LinkTo @route="todos.create">Add Todo</LinkTo></li>
+          <div class="vertical" style="border-left: 6px solid #ededf0;"></div>
+          <li class="nav-item"><LinkTo @route="reports">Reports</LinkTo></li>
         </ul>
       </div>
     </div>
   </nav>
 </header>
-<div class="container">
-  <div class="btn-group" role="group">
-    <LinkTo @route="todos.create" class="btn btn-primary">Add Todo</LinkTo>
-    <div class="vertical"></div>
-    <LinkTo @route="reports" class="btn btn-primary">Reports</LinkTo></div>
-</div>
 {{outlet}}
 </body><loom-container id="lo-engage-ext-container"><div></div><loom-shadow classname="resolved"></loom-shadow></loom-container>
 

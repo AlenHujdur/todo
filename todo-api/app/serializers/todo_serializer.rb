@@ -2,13 +2,13 @@
 
 class TodoSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
-  attributes :id, :name, :description, :finished, :created_at, :updated_at, :avatar
+  attributes :id, :name, :description, :finished, :created_at, :updated_at, :document
 
-  def avatar
-    if object.avatar.attached?
+  def document
+    if object.document.attached?
       {
-        url: rails_blob_url(object.avatar),
-        signed_id: object.avatar.signed_id
+        url: rails_blob_url(object.document),
+        signed_id: object.document.signed_id
       }
     end
   end

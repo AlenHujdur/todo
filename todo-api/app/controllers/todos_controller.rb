@@ -1,40 +1,33 @@
 class TodosController < ApplicationController
-  #skip_before_action :verify_authenticity_token
-=begin
-  def allow_access
-    headers['Access-Control-Allow-Origin'] = '*'
-    headers['Access-Control-Allow-Methods'] = 'POST, PUT, DELETE, GET, OPTIONS'
-    headers['Access-Control-Request-Method'] = '*'
-    headers['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
-  end
-=end
-
-  #include Rails.application.routes.url_helpers
 
   def index
-    @todos = {'data' => Todo.all}
-    render json: @todos
+    @todos = Todo.all
+    render json: @todos.map { |todo|
+      if todo.document.attached?
+        todo.as_json.merge({ doc_url: rails_blob_path(todo.document, only_path: true), signedId: todo.document.signed_id})
+      else
+        todo.as_json
+      end
+      }
   end
   def create
     @todo = Todo.create!(todo_params)
     render json: @todo
-
-    # @todo = Todo.new(todo_params)
-
-    # if @todo.save
-    #   render json: @todo
-    # else
-    #   respond_with_errors @todo
-    # end
   end
   def show
     @todo = Todo.find(params[:id])
     render json: @todo
   end
   def update
+    # p "UPDATE params #{params.inspect}"
     @todo = Todo.find(params[:id])
-    @todo.update(todo_params)
-    render json: @todo
+    # if @todo.document.attached?
+      @todo.update(todo_params)
+      render json: @todo
+    # else
+    #   @todo.update(params_without_file)
+    #   render json: @todo
+    # end
   end
   def destroy
     @todo = Todo.find(params[:id])
@@ -42,8 +35,10 @@ class TodosController < ApplicationController
   end
 
   private
-
   def todo_params
-    params.require(:todo).permit(:name, :description, :finished, :created_at, :updated_at, :avatar)#documents: []
+    params.require(:todo).permit(:name, :description, :finished, :created_at, :updated_at, :document)
   end
+  # def params_without_file
+  #   params.require(:todo).permit(:name, :description, :finished, :created_at, :updated_at)
+  # end
 end

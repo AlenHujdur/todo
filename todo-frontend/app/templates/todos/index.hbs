@@ -10,7 +10,8 @@
                       Todo description: {{todo.description}}<br>
                       Todo created at: {{todo.created_at}}<br>
                       Todo updated at: {{todo.updated_at}}<br>
-                      Status: {{todo.finished}}
+                      Status: {{todo.finished}} <br>
+                      <img src="http://localhost:3000{{todo.doc_url}}" alt="no image">
                     </p>
                 </div>
               <LinkTo @route="todos.show" @model={{todo.id}} ><a class="btn btn-success pull-left">Open</a></LinkTo>

@@ -1,4 +1,4 @@
-
+<br><br>
 <div class="container">
   <ul class="list-group">
       <li class="list-group-item"><span>{{model.id}} - {{model.name}}</span>
@@ -10,7 +10,8 @@
               Todo description: {{model.description}}<br>
               Todo created at: {{model.created_at}}<br>
               Todo updated at: {{model.updated_at}}<br>
-                Status: {{model.finished}}<br>
+              Status: {{model.finished}}<br>
+              <img src="http://localhost:3000{{model.doc_url}}" alt="no image">
             </p>
           </div>
           <LinkTo @route="todos.update" @model="{{model.id}}" class="btn btn-primary pull-left">Update</LinkTo>

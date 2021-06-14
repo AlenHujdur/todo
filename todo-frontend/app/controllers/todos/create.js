@@ -2,10 +2,9 @@ import Controller from '@ember/controller';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 import { inject as service } from '@ember/service';
-//import config from '../config/environment.js';
 
 export default class CreateController extends Controller {
-  _avatar = null;
+  _document = null;
   @service
   activeStorage;
 
@@ -14,6 +13,11 @@ export default class CreateController extends Controller {
 
   @tracked
   xhrs = [];
+
+  @action
+  redirect() {
+    window.location.href = "http://localhost:4200/todos";
+  }
 
   @action
   upload(event) {
@@ -32,33 +36,25 @@ export default class CreateController extends Controller {
             },
           }).then((blob) => {
             const signedId = blob.signedId;
-            this.model.avatar = signedId;
-            this._avatar = this.model.avatar
+            this.model.document = signedId;
+            this._document = this.model.document;
           });
-        //console.log("Active storage: " + this.activeStorage);
-        //console.log("Signed id: " + signedId);
-        console.log("Avatar id: "+ this._avatar);
       }
     }
   }
 
   @action
   createTodo(event) {
-    //alert("now we can submit the model:" + this.get("todo"));
-    console.log("Avatar id:" +this._avatar)
     event.preventDefault();
 
-    let todo = this.store.createRecord('todo',{
+    this.store.createRecord('todo',{
       name: this.name,
       description: this.description,
       finished: this.finished,
       created_at: this.created_at,
-      avatar: this._avatar//selectedFile //this.document
-    }).save()
-    redirect()
-    function redirect(){
-      alert("Saved");
-      todo.transitionTo('index')
-    }
+      document: this._document
+    }).save();
+    alert("Todo created!");
+    this.redirect();
   }
 }
