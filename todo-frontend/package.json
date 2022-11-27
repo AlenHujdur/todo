@@ -70,7 +70,8 @@
   },
   "dependencies": {
     "d3": "^6.3.1",
-    "fetch": "^1.1.0"
+    "fetch": "^1.1.0",
+    "yarn": "^1.22.19"
   },
   "emberx-select": "github:adopted-ember-addons/emberx-select"
 }
